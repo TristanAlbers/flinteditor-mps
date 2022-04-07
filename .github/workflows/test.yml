@@ -21,8 +21,8 @@ jobs:
           java-version: 11
       - name: Check java
         run: java --version
-      - name: Set up swap space
-        uses: pierotofy/set-swap-space@v1.0
+      - name: Set Swap Space
+        uses: pierotofy/set-swap-space@master
         with:
           swap-size-gb: 10
       - name: Setup xvfb (Linux)
