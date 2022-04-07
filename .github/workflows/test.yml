@@ -21,15 +21,18 @@ jobs:
           java-version: 11
       - name: Check java
         run: java --version
-      - name: Set Swap Space
-        uses: pierotofy/set-swap-space@master
-        with:
-          swap-size-gb: 10
+      
       - name: Setup xvfb (Linux)
         if: ${{ matrix.os == 'ubuntu-20.04' }}
         run: |
           sudo apt-get install -y xvfb
           sudo /usr/bin/Xvfb $DISPLAY -screen 0 1280x1024x24 &
+
+      - name: Set Swap Space
+        uses: pierotofy/set-swap-space@master
+        with:
+          swap-size-gb: 10
+
       - uses: burrunan/gradle-cache-action@v1
         name: Test
         with:
