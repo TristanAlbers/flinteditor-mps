@@ -21,6 +21,10 @@ jobs:
           java-version: 11
       - name: Check java
         run: java --version
+      - name: Set up swap space
+        uses: pierotofy/set-swap-space@v1.0
+        with:
+          swap-size-gb: 10
       - name: Setup xvfb (Linux)
         if: ${{ matrix.os == 'ubuntu-20.04' }}
         run: |
