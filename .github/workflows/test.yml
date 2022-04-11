@@ -41,9 +41,3 @@ jobs:
         with:
           name: test-results-${{ matrix.os }}
           path: code/build/reports/html
-      - name: Upload Java Head Dump
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v2
-        with:
-          name: java-heap-dump-${{ matrix.os }}
-          path: code/build/reports/heapdump
