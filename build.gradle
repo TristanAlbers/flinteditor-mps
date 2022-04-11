@@ -531,7 +531,7 @@ task fixClassPathIssues(dependsOn: ["generateScripts"]) {
                 org.dom4j.Element jvmElement = ((org.dom4j.Element) it)
                 def value = jvmElement.attributeValue("value")
                 if (value != null && value.startsWith("-Xmx")) {
-                    value = "-Xmx2048m"
+                    value = "-Xmx1024m"
                     jvmElement.attribute("value").setValue(value)
                     println "Higher mem value: " + value
                 }
