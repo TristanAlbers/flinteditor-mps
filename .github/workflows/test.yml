@@ -21,19 +21,11 @@ jobs:
           java-version: 11
       - name: Check java
         run: java --version
-      
       - name: Setup xvfb (Linux)
         if: ${{ matrix.os == 'ubuntu-20.04' }}
         run: |
           sudo apt-get install -y xvfb
           sudo /usr/bin/Xvfb $DISPLAY -screen 0 1280x1024x24 &
-
-      - name: Set Swap Space
-        if: ${{ matrix.os == 'ubuntu-20.04' }}
-        uses: pierotofy/set-swap-space@master
-        with:
-          swap-size-gb: 10
-
       - uses: burrunan/gradle-cache-action@v1
         name: Test
         with:
@@ -49,3 +41,9 @@ jobs:
         with:
           name: test-results-${{ matrix.os }}
           path: code/build/reports/html
+      - name: Upload Java Head Dump
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: java-heap-dump-${{ matrix.os }}
+          path: code/build/reports/heapdump
